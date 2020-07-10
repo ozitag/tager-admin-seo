@@ -4,6 +4,7 @@
       :column-defs="columnDefs"
       :row-data="rowData"
       :loading="isRowDataLoading"
+      enumerable
     >
       <template v-slot:cell(actions)="{ row }">
         <base-button variant="icon" title="Edit" :href="getSeoPageHref(row.id)">
@@ -24,7 +25,6 @@ import { getSeoPageList } from '../services/requests';
 import { SEO_ROUTE_PATHS } from '../constants/paths';
 
 const COLUMN_DEFS: Array<ColumnDefinition<SeoPageType>> = [
-  { id: 1, name: 'ID', field: 'id', style: { width: '25px' } },
   { id: 2, name: 'Alias', field: 'alias' },
   { id: 3, name: 'Name', field: 'name' },
   { id: 4, name: 'Title', field: 'title' },
