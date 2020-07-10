@@ -18,7 +18,6 @@
 import Vue from 'vue';
 import { compile } from 'path-to-regexp';
 import { ColumnDefinition } from '@tager/admin-ui';
-import { getImageUrl } from '@tager/admin-services';
 
 import { SeoPageType } from '../typings/model';
 import { getSeoPageList } from '../services/requests';
@@ -30,14 +29,11 @@ const COLUMN_DEFS: Array<ColumnDefinition<SeoPageType>> = [
   { id: 3, name: 'Name', field: 'name' },
   { id: 4, name: 'Title', field: 'title' },
   { id: 5, name: 'Description', field: 'description' },
-  { id: 6, name: 'Open Graph Title', field: 'openGraphTitle' },
-  { id: 7, name: 'Open Graph Description', field: 'openGraphDescription' },
   {
     id: 8,
     name: 'Open Graph Image',
-    field: 'openGraphImage',
+    field: 'openGraphImage.url',
     type: 'image',
-    format: ({ row }) => getImageUrl(row.openGraphImage),
   },
   {
     id: 9,

@@ -120,8 +120,8 @@ export default Vue.extend({
       return {
         title: seoPage.title,
         description: seoPage.description,
-        openGraphTitle: seoPage.openGraphTitle,
-        openGraphDescription: seoPage.openGraphDescription,
+        openGraphTitle: seoPage.openGraphTitle ?? '',
+        openGraphDescription: seoPage.openGraphDescription ?? '',
         openGraphImage: seoPage.openGraphImage,
       };
     },

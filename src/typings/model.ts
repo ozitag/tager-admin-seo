@@ -6,7 +6,7 @@ export type SeoPageType = {
   name: string;
   title: string;
   description: string;
-  openGraphTitle: string;
-  openGraphDescription: string;
+  openGraphTitle: Nullable<string>;
+  openGraphDescription: Nullable<string>;
   openGraphImage: Nullable<FileType>;
 };
