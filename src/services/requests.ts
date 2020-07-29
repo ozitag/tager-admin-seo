@@ -4,7 +4,7 @@ import { SeoPageType } from '../typings/model';
 
 export function getSeoPageList(): Promise<ResponseBody<Array<SeoPageType>>> {
   return request.get({
-    path: '/seo/pages',
+    path: '/admin/seo/pages',
   });
 }
 
@@ -12,7 +12,7 @@ export function getSeoPage(
   seoPageId: number | string
 ): Promise<ResponseBody<SeoPageType>> {
   return request.get({
-    path: `/seo/pages/${seoPageId}`,
+    path: `/admin/seo/pages/${seoPageId}`,
   });
 }
 
@@ -29,7 +29,7 @@ export function updateSeoPage(
   payload: SeoPageUpdatePayload
 ): Promise<ResponseBody<SeoPageType>> {
   return request.put({
-    path: `/seo/pages/${seoPageId}`,
+    path: `/admin/seo/pages/${seoPageId}`,
     body: payload,
   });
 }

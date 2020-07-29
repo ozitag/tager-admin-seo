@@ -65,7 +65,7 @@ import {
   updateSeoPage,
 } from '../services/requests';
 import { SeoPageType } from '../typings/model';
-import { SEO_ROUTE_PATHS } from '../constants/paths';
+import { getSeoListUrl } from '../utils/paths';
 
 type FormValues = {
   title: string;
@@ -95,7 +95,7 @@ export default Vue.extend({
       errors: {},
       isSubmitting: false,
       isInitialLoading: false,
-      seoPageListRoutePath: SEO_ROUTE_PATHS.PAGE_LIST,
+      seoPageListRoutePath: getSeoListUrl(),
     };
   },
   computed: {
@@ -136,7 +136,7 @@ export default Vue.extend({
       updateSeoPage(this.seoPageId, body)
         .then(() => {
           this.errors = {};
-          this.$router.push(SEO_ROUTE_PATHS.PAGE_LIST);
+          this.$router.push(getSeoListUrl());
 
           this.$toast({
             variant: 'success',

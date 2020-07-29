@@ -8,12 +8,12 @@
 import Vue from 'vue';
 
 import { MenuItemType } from '@tager/admin-layout';
-import { SEO_ROUTE_PATHS } from '..';
+import { getSeoListUrl } from '../utils/paths';
 
 export const SEO_MENU_ITEM: MenuItemType = {
   id: 'seo',
   name: 'SEO Page Settings',
-  path: SEO_ROUTE_PATHS.PAGE_LIST,
+  path: getSeoListUrl(),
   icon: 'settings',
 };
 
