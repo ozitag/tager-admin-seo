@@ -12,8 +12,8 @@ import { getSeoListUrl } from '../utils/paths';
 
 export const SEO_MENU_ITEM: MenuItemType = {
   id: 'seo',
-  name: 'SEO Page Settings',
-  path: getSeoListUrl(),
+  text: 'SEO Page Settings',
+  url: getSeoListUrl(),
   icon: 'settings',
 };
 

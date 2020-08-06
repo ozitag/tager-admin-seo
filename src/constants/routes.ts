@@ -5,7 +5,7 @@ import SeoPageForm from '../views/SeoPageForm.vue';
 
 import { SEO_ROUTE_PATHS } from './paths';
 
-const HOME_BREADCRUMB = { path: '/', label: 'Home' };
+const HOME_BREADCRUMB = { url: '/', text: 'Home' };
 
 export const SEO_PAGE_LIST_ROUTE: CustomRouteConfig = {
   path: SEO_ROUTE_PATHS.PAGE_LIST,
@@ -14,7 +14,7 @@ export const SEO_PAGE_LIST_ROUTE: CustomRouteConfig = {
   meta: {
     getBreadcrumbs: () => [
       HOME_BREADCRUMB,
-      { path: SEO_ROUTE_PATHS.PAGE_LIST, label: 'SEO Page Settings' },
+      { url: SEO_ROUTE_PATHS.PAGE_LIST, text: 'SEO Page Settings' },
     ],
   },
 };
@@ -26,7 +26,7 @@ export const SEO_PAGE_FORM_ROUTE: CustomRouteConfig = {
   meta: {
     getBreadcrumbs: () => [
       HOME_BREADCRUMB,
-      { path: SEO_ROUTE_PATHS.PAGE_FORM, label: 'SEO Page Form' },
+      { url: SEO_ROUTE_PATHS.PAGE_FORM, text: 'SEO Page Form' },
     ],
   },
 };
