@@ -8,13 +8,18 @@
 import Vue from 'vue';
 
 import { MenuItemType } from '@tager/admin-layout';
-import { getSeoListUrl } from '../utils/paths';
+
+import { getSeoPageListUrl, getSeoSettingsUrl } from '../utils/paths';
 
 export const SEO_MENU_ITEM: MenuItemType = {
   id: 'seo',
   text: 'SEO Page Settings',
-  url: getSeoListUrl(),
+  url: getSeoPageListUrl(),
   icon: 'settings',
+  children: [
+    { url: getSeoPageListUrl(), text: 'Seo Page List' },
+    { url: getSeoSettingsUrl(), text: 'Settings' },
+  ],
 };
 
 export default Vue.extend({

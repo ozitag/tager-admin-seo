@@ -17,11 +17,12 @@
 
 <script lang="ts">
 import Vue from 'vue';
+
 import { ColumnDefinition } from '@tager/admin-ui';
 
 import { SeoPageType } from '../typings/model';
 import { getSeoPageList } from '../services/requests';
-import { getSeoFormUrl } from '../utils/paths';
+import { getSeoPageFormUrl } from '../utils/paths';
 
 const COLUMN_DEFS: Array<ColumnDefinition<SeoPageType>> = [
   { id: 2, name: 'Alias', field: 'alias' },
@@ -72,7 +73,7 @@ export default Vue.extend({
         });
     },
     getSeoPageHref(seoPageId: number): string {
-      return getSeoFormUrl({ seoPageId });
+      return getSeoPageFormUrl({ seoPageId });
     },
   },
 });

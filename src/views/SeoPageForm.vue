@@ -53,6 +53,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+
 import {
   convertRequestErrorToMap,
   FileType,
@@ -65,7 +66,7 @@ import {
   updateSeoPage,
 } from '../services/requests';
 import { SeoPageType } from '../typings/model';
-import { getSeoListUrl } from '../utils/paths';
+import { getSeoPageListUrl } from '../utils/paths';
 
 type FormValues = {
   title: string;
@@ -95,7 +96,7 @@ export default Vue.extend({
       errors: {},
       isSubmitting: false,
       isInitialLoading: false,
-      seoPageListRoutePath: getSeoListUrl(),
+      seoPageListRoutePath: getSeoPageListUrl(),
     };
   },
   computed: {
@@ -136,7 +137,7 @@ export default Vue.extend({
       updateSeoPage(this.seoPageId, body)
         .then(() => {
           this.errors = {};
-          this.$router.push(getSeoListUrl());
+          this.$router.push(getSeoPageListUrl());
 
           this.$toast({
             variant: 'success',

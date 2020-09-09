@@ -2,6 +2,7 @@ import { CustomRouteConfig } from '@tager/admin-layout';
 
 import SeoPageList from '../views/SeoPageList.vue';
 import SeoPageForm from '../views/SeoPageForm.vue';
+import SeoSettings from '../views/SeoSettings';
 
 import { SEO_ROUTE_PATHS } from './paths';
 
@@ -27,6 +28,18 @@ export const SEO_PAGE_FORM_ROUTE: CustomRouteConfig = {
     getBreadcrumbs: () => [
       HOME_BREADCRUMB,
       { url: SEO_ROUTE_PATHS.PAGE_FORM, text: 'SEO Page Form' },
+    ],
+  },
+};
+
+export const SEO_SETTINGS_ROUTE: CustomRouteConfig = {
+  path: SEO_ROUTE_PATHS.SETTINGS,
+  component: SeoSettings,
+  name: 'SEO Settings',
+  meta: {
+    getBreadcrumbs: () => [
+      HOME_BREADCRUMB,
+      { url: SEO_ROUTE_PATHS.SETTINGS, text: 'SEO Settings' },
     ],
   },
 };

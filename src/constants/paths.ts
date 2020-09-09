@@ -1,4 +1,5 @@
 export const SEO_ROUTE_PATHS = {
-  PAGE_LIST: '/settings/seo',
-  PAGE_FORM: '/settings/seo/:seoPageId',
+  PAGE_LIST: '/seo/pages',
+  PAGE_FORM: '/seo/pages/:seoPageId',
+  SETTINGS: '/seo/settings',
 } as const;
