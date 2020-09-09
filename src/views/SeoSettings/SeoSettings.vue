@@ -31,7 +31,6 @@ import {
   getSeoSettingList,
   updateSeoSettingList,
 } from '../../services/requests';
-import { getSeoSettingsUrl } from '../../utils/paths';
 
 import DynamicField from './component/DynamicField.vue';
 import { convertSettingListToRequestPayload } from './SeoSettings.helpers';
@@ -65,7 +64,7 @@ export default defineComponent({
       updateSeoSettingList(body)
         .then(() => {
           errors.value = {};
-          context.root.$router.push(getSeoSettingsUrl());
+          context.root.$router.push('/');
 
           context.root.$toast({
             variant: 'success',
