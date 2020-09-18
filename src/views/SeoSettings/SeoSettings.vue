@@ -11,10 +11,9 @@
     <template v-slot:content>
       <form novalidate @submit.prevent="submitForm">
         <DynamicField
-          v-for="settingField of settingList"
-          :key="settingField.name"
-          :field="settingField"
-          :error="errors[settingField.name]"
+          v-for="field of values"
+          :key="field.name"
+          :field="field"
         />
       </form>
     </template>
@@ -22,25 +21,29 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref } from '@vue/composition-api';
+import { defineComponent, onMounted, ref, watch } from '@vue/composition-api';
 
 import { convertRequestErrorToMap, useResource } from '@tager/admin-services';
+import { DynamicField } from '@tager/admin-dynamic-field';
 
-import { SettingsItemType } from '../../typings/model';
 import {
   getSeoSettingList,
   updateSeoSettingList,
 } from '../../services/requests';
+import { SettingItemType } from '../../typings/model';
 
-import DynamicField from './component/DynamicField.vue';
-import { convertSettingListToRequestPayload } from './SeoSettings.helpers';
+import {
+  convertSettingsToFormValues,
+  convertSettingValuesToRequestPayload,
+  SettingsFormValues,
+} from './SeoSettings.helpers';
 
 export default defineComponent({
   name: 'SeoSettings',
   components: { DynamicField },
   setup(props, context) {
     const [fetchSettingList, { data: settingList, loading }] = useResource<
-      Array<SettingsItemType>
+      Array<SettingItemType>
     >({
       fetchResource: getSeoSettingList,
       initialValue: [],
@@ -53,13 +56,20 @@ export default defineComponent({
     });
 
     const isSubmitting = ref<boolean>(false);
+    const values = ref<SettingsFormValues>(
+      convertSettingsToFormValues(settingList.value)
+    );
+
+    watch(settingList, () => {
+      values.value = convertSettingsToFormValues(settingList.value);
+    });
 
     const errors = ref<Record<string, string>>({});
 
     function submitForm() {
       isSubmitting.value = true;
 
-      const body = convertSettingListToRequestPayload(settingList.value);
+      const body = convertSettingValuesToRequestPayload(values.value);
 
       updateSeoSettingList(body)
         .then(() => {
@@ -90,7 +100,7 @@ export default defineComponent({
       isContentLoading: loading,
       submitForm,
       isSubmitting,
-      settingList,
+      values,
       errors,
     };
   },
