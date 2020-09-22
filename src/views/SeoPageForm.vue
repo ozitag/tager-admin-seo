@@ -56,9 +56,10 @@ import Vue from 'vue';
 
 import {
   convertRequestErrorToMap,
-  FileType,
+  createId,
   Nullable,
 } from '@tager/admin-services';
+import { SingleFileInputValueType } from '@tager/admin-ui';
 
 import {
   getSeoPage,
@@ -73,7 +74,7 @@ type FormValues = {
   description: string;
   openGraphTitle: string;
   openGraphDescription: string;
-  openGraphImage: Nullable<FileType>;
+  openGraphImage: Nullable<SingleFileInputValueType>;
 };
 
 export default Vue.extend({
@@ -123,7 +124,9 @@ export default Vue.extend({
         description: seoPage.description,
         openGraphTitle: seoPage.openGraphTitle ?? '',
         openGraphDescription: seoPage.openGraphDescription ?? '',
-        openGraphImage: seoPage.openGraphImage,
+        openGraphImage: seoPage.openGraphImage
+          ? { id: createId(), file: seoPage.openGraphImage }
+          : null,
       };
     },
     submitForm() {
@@ -131,7 +134,7 @@ export default Vue.extend({
 
       const body: SeoPageUpdatePayload = {
         ...this.values,
-        openGraphImage: this.values.openGraphImage?.id ?? null,
+        openGraphImage: this.values.openGraphImage?.file.id ?? null,
       };
 
       updateSeoPage(this.seoPageId, body)
