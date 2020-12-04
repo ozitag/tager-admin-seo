@@ -1,6 +1,6 @@
 <template>
   <page
-    title="SEO Settings"
+    title="SEO Services"
     :is-content-loading="isContentLoading"
     :footer="{
       backHref: '/',
