@@ -1006,6 +1006,11 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
+"@popperjs/core@^2.6.0":
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.6.0.tgz#f022195afdfc942e088ee2101285a1d31c7d727f"
+  integrity sha512-cPqjjzuFWNK3BSKLm0abspP0sp/IGOli4p5I5fKFAzdS8fvjdOwDCfZqAaIiXd9lPkOWi3SUUfZof3hEb7J/uw==
+
 "@rollup/plugin-commonjs@^15.0.0":
   version "15.0.0"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-commonjs/-/plugin-commonjs-15.0.0.tgz#690d15a9d54ba829db93555bff9b98ff34e08574"
@@ -1063,32 +1068,38 @@
     lodash.kebabcase "^4.1.1"
     nanoid "^3.1.12"
 
-"@tager/admin-layout@^0.4.2":
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/@tager/admin-layout/-/admin-layout-0.4.2.tgz#d5c033a3d693cf947d7fabfc4513ad511d83bb02"
-  integrity sha512-n4ZvEo6HP5CglIq7zrfn1rkgrrio53LyWu/oTBK5t6IgYn3vR/r3zMv1SZbNdQTrGiLZMIBvd24DWUw6kjDjYg==
+"@tager/admin-layout@^0.4.9":
+  version "0.4.9"
+  resolved "https://registry.yarnpkg.com/@tager/admin-layout/-/admin-layout-0.4.9.tgz#325281131a2dcd200cbbf8f76ad198e992d057f7"
+  integrity sha512-0FOgKbnoxZerPsIuc/rS9ApYHeYxdmILjCNLFzvM9FoXYkaM7Dp0pBMWWtE64dJFdVaKkzpilwGA+YR++qS5nQ==
   dependencies:
     "@babel/runtime" "^7.10.4"
 
-"@tager/admin-services@^0.2.11":
-  version "0.2.11"
-  resolved "https://registry.yarnpkg.com/@tager/admin-services/-/admin-services-0.2.11.tgz#d19a1729d5e83f6341722afe17c410cb2942b5ce"
-  integrity sha512-mtXt2bAL4O74okO0QxBIOmx0rHlrcPdfXSvcFTT3YlFgYxaAPZhqlkdKxVCFcj+6bd4FZbGeDRbxWesTXOHVyQ==
+"@tager/admin-services@^0.2.19":
+  version "0.2.19"
+  resolved "https://registry.yarnpkg.com/@tager/admin-services/-/admin-services-0.2.19.tgz#c0c311999eabdc1bd12044f8143bf1f660776f71"
+  integrity sha512-AcfIDyQFm7es71yz/QciTtT6xCx4ZR1NeL7jrTyhstdbMKu880Jw5T0FMGT9ypV8YTkjCLDR1KBcU1SZt6yUyw==
   dependencies:
     i18next "^19.7.0"
     nanoid "^3.1.12"
-    zod "^1.11.8"
+    zod "^1.11.9"
 
-"@tager/admin-ui@^0.7.5":
-  version "0.7.5"
-  resolved "https://registry.yarnpkg.com/@tager/admin-ui/-/admin-ui-0.7.5.tgz#8a24b96ac1a9c8803197b86795b1312510637eff"
-  integrity sha512-OlvoTjBaiwecMzomX1ZATp0B70CwHEuBDrT2eyFjGvguaarsI9CMEz9+S0Eof+T+zOQaqsbzuCc3tDcHQppZjw==
+"@tager/admin-ui@^0.8.28":
+  version "0.8.28"
+  resolved "https://registry.yarnpkg.com/@tager/admin-ui/-/admin-ui-0.8.28.tgz#adc26cf72a53ce1e10be06c4117c6d60b6e98b40"
+  integrity sha512-/HeAdmKkjyaoyOabp66J7rUa72XQDMZdtmLTjkD34gAfJYh/Kvq78v7Edtl6IUxMAeI33xMb0QgWkq1eB7UOcA==
   dependencies:
     "@babel/runtime" "^7.11.2"
     "@ckeditor/ckeditor5-vue" "^1.0.2"
+    "@popperjs/core" "^2.6.0"
     "@tager/admin-wysiwyg" "^0.1.0"
+    autosize "^4.0.2"
+    leaflet "^1.7.1"
+    lodash.debounce "^4.0.8"
     lodash.get "^4.4.2"
     lodash.kebabcase "^4.1.1"
+    smoothscroll-polyfill "^0.4.4"
+    tinycolor2 "^1.4.2"
     vue-color "^2.7.1"
 
 "@tager/admin-wysiwyg@^0.1.0":
@@ -2201,6 +2212,11 @@ autoprefixer@^9.8.6:
     num2fraction "^1.2.2"
     postcss "^7.0.32"
     postcss-value-parser "^4.1.0"
+
+autosize@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/autosize/-/autosize-4.0.2.tgz#073cfd07c8bf45da4b9fd153437f5bafbba1e4c9"
+  integrity sha512-jnSyH2d+qdfPGpWlcuhGiHmqBJ6g3X+8T+iRwFrHPLVcdoGJE/x6Qicm6aDHfTsbgZKxyV8UU/YB2p4cjKDRRA==
 
 aws-sign2@~0.7.0:
   version "0.7.0"
@@ -5871,6 +5887,11 @@ lazy-cache@^1.0.3:
   resolved "https://registry.yarnpkg.com/lazy-cache/-/lazy-cache-1.0.4.tgz#a1d78fc3a50474cb80845d3b3b6e1da49a446e8e"
   integrity sha1-odePw6UEdMuAhF07O24dpJpEbo4=
 
+leaflet@^1.7.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/leaflet/-/leaflet-1.7.1.tgz#10d684916edfe1bf41d688a3b97127c0322a2a19"
+  integrity sha512-/xwPEBidtg69Q3HlqPdU3DnrXQOvQU/CCHA1tcDQVzOwm91YMYaILjNp7L4Eaw5Z4sOYdbBz6koWyibppd8Zqw==
+
 less@^3.9.0:
   version "3.11.3"
   resolved "https://registry.yarnpkg.com/less/-/less-3.11.3.tgz#2d853954fcfe0169a8af869620bcaa16563dcc1c"
@@ -5986,6 +6007,11 @@ locate-path@^5.0.0:
   integrity sha512-t7hw9pI+WvuwNJXwk5zVHpyhIqzg2qTlklJOf0mVxGSbe3Fp2VieZcduNYjaLDoy6p9uGpQEGWG87WpMKlNq8g==
   dependencies:
     p-locate "^4.1.0"
+
+lodash.debounce@^4.0.8:
+  version "4.0.8"
+  resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
+  integrity sha1-gteb/zCmfEAF/9XiUVMArZyk168=
 
 lodash.defaultsdeep@^4.6.1:
   version "4.6.1"
@@ -8429,6 +8455,11 @@ slice-ansi@^2.1.0:
     astral-regex "^1.0.0"
     is-fullwidth-code-point "^2.0.0"
 
+smoothscroll-polyfill@^0.4.4:
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/smoothscroll-polyfill/-/smoothscroll-polyfill-0.4.4.tgz#3a259131dc6930e6ca80003e1cb03b603b69abf8"
+  integrity sha512-TK5ZA9U5RqCwMpfoMq/l1mrH0JAR7y7KRvOBx0n2869aLxch+gT9GhN3yUfjiw+d/DiF1mKo14+hd62JyMmoBg==
+
 snapdragon-node@^2.0.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/snapdragon-node/-/snapdragon-node-2.1.1.tgz#6c175f86ff14bdb0724563e8f3c1b021a286853b"
@@ -8997,6 +9028,11 @@ tinycolor2@^1.1.2:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/tinycolor2/-/tinycolor2-1.4.1.tgz#f4fad333447bc0b07d4dc8e9209d8f39a8ac77e8"
   integrity sha1-9PrTM0R7wLB9TcjpIJ2POaisd+g=
+
+tinycolor2@^1.4.2:
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/tinycolor2/-/tinycolor2-1.4.2.tgz#3f6a4d1071ad07676d7fa472e1fac40a719d8803"
+  integrity sha512-vJhccZPs965sV/L2sU4oRQVAos0pQXwsvTLkWYdqJ+a8Q5kPFzJTuOFwy7UniPli44NKQGAglksjvOcpo95aZA==
 
 tmp@^0.0.33:
   version "0.0.33"
@@ -9927,7 +9963,7 @@ yorkie@^2.0.0:
     normalize-path "^1.0.0"
     strip-indent "^2.0.0"
 
-zod@^1.11.8:
-  version "1.11.8"
-  resolved "https://registry.yarnpkg.com/zod/-/zod-1.11.8.tgz#5e6b2eb3114c73d5043889fa9dfbab0b60a93ff6"
-  integrity sha512-iusmIB00ll0Fxzyhrp8EJPaJDTSyQMKMCwk2hH2XrtgY/QcygPJTX13fSof/r7b4hL5cBeN5aeVl6WN1xpr90g==
+zod@^1.11.9:
+  version "1.11.11"
+  resolved "https://registry.yarnpkg.com/zod/-/zod-1.11.11.tgz#1cc937e0b4ce08693de01b5bcd7c4d1a37d83993"
+  integrity sha512-q1YeBpu+c7eUX5fDFMyfP97sD74TUQ+UN8va/nvbxnArr5euYsNO6fjiY0SdDkHKNZ+xBR2ZQToaeLgJ6fsB2A==

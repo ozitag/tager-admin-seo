@@ -129,7 +129,7 @@ export default Vue.extend({
           : null,
       };
     },
-    submitForm() {
+    submitForm({ shouldExit }: { shouldExit: boolean }) {
       this.isSubmitting = true;
 
       const body: SeoPageUpdatePayload = {
@@ -140,7 +140,10 @@ export default Vue.extend({
       updateSeoPage(this.seoPageId, body)
         .then(() => {
           this.errors = {};
-          this.$router.push(getSeoPageListUrl());
+
+          if (shouldExit) {
+            this.$router.push(getSeoPageListUrl());
+          }
 
           this.$toast({
             variant: 'success',
