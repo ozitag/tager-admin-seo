@@ -5,28 +5,33 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent, SetupContext } from '@vue/composition-api';
 
 import { MenuItemType } from '@tager/admin-layout';
+import { useTranslation } from '@tager/admin-ui';
 
 import { getSeoPageListUrl, getSeoSettingsUrl } from '../utils/paths';
 
-export const SEO_MENU_ITEM: MenuItemType = {
-  id: 'seo',
-  text: 'SEO Page Settings',
-  url: getSeoPageListUrl(),
-  icon: 'settings',
-  children: [
-    { url: getSeoPageListUrl(), text: 'Seo Page List' },
-    { url: getSeoSettingsUrl(), text: 'Settings' },
-  ],
-};
-
-export default Vue.extend({
+export default defineComponent({
   name: 'App',
-  data() {
+  setup(props, context: SetupContext) {
+    const { t } = useTranslation(context);
+
+    const sidebarMenuList: Array<MenuItemType> = [
+      {
+        id: 'seo',
+        text: t('seo:SEOPageSettings'),
+        url: getSeoPageListUrl(),
+        icon: 'settings',
+        children: [
+          { url: getSeoPageListUrl(), text: t('seo:seoPageList') },
+          { url: getSeoSettingsUrl(), text: t('seo:settings') },
+        ],
+      },
+    ];
+
     return {
-      sidebarMenuList: [SEO_MENU_ITEM],
+      sidebarMenuList,
     };
   },
 });

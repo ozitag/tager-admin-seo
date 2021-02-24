@@ -1,10 +1,10 @@
 <template>
   <page
-    title="SEO Page Form"
+    :title="$t('seo:SEOPageForm')"
     :is-content-loading="isInitialLoading"
     :footer="{
       backHref: seoPageListRoutePath,
-      backLabel: 'Back to SEO Page Settings',
+      backLabel: $t('seo:backToSEOPageSettings'),
       onSubmit: submitForm,
       isSubmitting: isSubmitting,
     }"
@@ -13,14 +13,14 @@
       <form-field
         v-model="values.title"
         name="title"
-        label="Title"
+        :label="$t('seo:title')"
         :error="errors.title"
       />
 
       <form-field
         v-model="values.description"
         name="description"
-        label="Description"
+        :label="$t('seo:description')"
         :error="errors.description"
         type="textarea"
       />
@@ -28,14 +28,14 @@
       <form-field
         v-model="values.openGraphTitle"
         name="openGraphTitle"
-        label="Open Graph Title"
+        :label="$t('seo:openGraphTitle')"
         :error="errors.openGraphTitle"
       />
 
       <form-field
         v-model="values.openGraphDescription"
         name="openGraphDescription"
-        label="Open Graph Description"
+        :label="$t('seo:openGraphDescription')"
         :error="errors.openGraphDescription"
         type="textarea"
       />
@@ -43,7 +43,7 @@
       <form-field-file-input
         v-model="values.openGraphImage"
         name="openGraphImage"
-        label="Open Graph Image"
+        :label="$t('seo:openGraphImage')"
         :error="errors.openGraphImage"
         file-type="image"
       />
@@ -52,7 +52,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from '@vue/composition-api';
 
 import {
   convertRequestErrorToMap,
@@ -77,7 +77,7 @@ type FormValues = {
   openGraphImage: Nullable<SingleFileInputValueType>;
 };
 
-export default Vue.extend({
+export default defineComponent({
   name: 'SeoPageForm',
   data(): {
     values: FormValues;

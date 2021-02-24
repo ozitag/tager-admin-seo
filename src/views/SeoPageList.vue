@@ -1,5 +1,5 @@
 <template>
-  <page title="SEO Page Settings">
+  <page :title="t('seo:SEOPageSettings')">
     <base-table
       :column-defs="columnDefs"
       :row-data="rowData"
@@ -7,7 +7,11 @@
       enumerable
     >
       <template v-slot:cell(actions)="{ row }">
-        <base-button variant="icon" title="Edit" :href="getSeoPageHref(row.id)">
+        <base-button
+          variant="icon"
+          :title="t('seo:edit')"
+          :href="getSeoPageHref(row.id)"
+        >
           <svg-icon name="edit"></svg-icon>
         </base-button>
       </template>
@@ -16,42 +20,21 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent, SetupContext } from '@vue/composition-api';
 
-import { ColumnDefinition } from '@tager/admin-ui';
+import { ColumnDefinition, useTranslation } from '@tager/admin-ui';
 
 import { SeoPageType } from '../typings/model';
 import { getSeoPageList } from '../services/requests';
 import { getSeoPageFormUrl } from '../utils/paths';
 
-const COLUMN_DEFS: Array<ColumnDefinition<SeoPageType>> = [
-  { id: 2, name: 'Alias', field: 'alias' },
-  { id: 3, name: 'Name', field: 'name' },
-  { id: 4, name: 'Title', field: 'title' },
-  { id: 5, name: 'Description', field: 'description' },
-  {
-    id: 8,
-    name: 'Open Graph Image',
-    field: 'openGraphImage.url',
-    type: 'image',
-  },
-  {
-    id: 9,
-    name: 'Actions',
-    field: 'actions',
-    style: { width: '80px', textAlign: 'center' },
-  },
-];
-
-export default Vue.extend({
+export default defineComponent({
   name: 'SeoPageList',
   data(): {
-    columnDefs: Array<ColumnDefinition<SeoPageType>>;
     rowData: Array<SeoPageType>;
     isRowDataLoading: boolean;
   } {
     return {
-      columnDefs: COLUMN_DEFS,
       rowData: [],
       isRowDataLoading: false,
     };
@@ -75,6 +58,33 @@ export default Vue.extend({
     getSeoPageHref(seoPageId: number): string {
       return getSeoPageFormUrl({ seoPageId });
     },
+  },
+  setup(props, context: SetupContext) {
+    const { t } = useTranslation(context);
+
+    const columnDefs: Array<ColumnDefinition<SeoPageType>> = [
+      { id: 2, name: t('seo:alias'), field: 'alias' },
+      { id: 3, name: t('seo:name'), field: 'name' },
+      { id: 4, name: t('seo:title'), field: 'title' },
+      { id: 5, name: t('seo:description'), field: 'description' },
+      {
+        id: 8,
+        name: t('seo:openGraphImage'),
+        field: 'openGraphImage.url',
+        type: 'image',
+      },
+      {
+        id: 9,
+        name: t('seo:actions'),
+        field: 'actions',
+        style: { width: '80px', textAlign: 'center' },
+      },
+    ];
+
+    return {
+      t,
+      columnDefs,
+    };
   },
 });
 </script>

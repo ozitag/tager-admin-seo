@@ -14,6 +14,8 @@ import {
   SEO_PAGE_LIST_ROUTE,
   SEO_SETTINGS_ROUTE,
 } from './constants/routes';
+import EN from './locales/en';
+import RU from './locales/ru';
 
 configStore.setConfig(config);
 
@@ -23,6 +25,9 @@ const router = createRouter(
   },
   { useTitleSync: false }
 );
+
+i18n.addTranslations('en', 'seo', EN);
+i18n.addTranslations('ru', 'seo', RU);
 
 i18n.init({ debug: false }).then(() => {
   Vue.use(VueCompositionApi);
