@@ -6,16 +6,14 @@ import SeoSettings from '../views/SeoSettings';
 
 import { SEO_ROUTE_PATHS } from './paths';
 
-const HOME_BREADCRUMB = { url: '/', text: 'Home' };
-
 export const SEO_PAGE_LIST_ROUTE: CustomRouteConfig = {
   path: SEO_ROUTE_PATHS.PAGE_LIST,
   component: SeoPageList,
   name: 'SEO Page Settings',
   meta: {
-    getBreadcrumbs: () => [
-      HOME_BREADCRUMB,
-      { url: SEO_ROUTE_PATHS.PAGE_LIST, text: 'SEO Page Settings' },
+    getBreadcrumbs: (route, t) => [
+      { url: '/', text: t('seo:home') },
+      { url: SEO_ROUTE_PATHS.PAGE_LIST, text: t('seo:SEOPageSettings') },
     ],
   },
 };
@@ -25,9 +23,9 @@ export const SEO_PAGE_FORM_ROUTE: CustomRouteConfig = {
   component: SeoPageForm,
   name: 'SEO Page Form',
   meta: {
-    getBreadcrumbs: () => [
-      HOME_BREADCRUMB,
-      { url: SEO_ROUTE_PATHS.PAGE_FORM, text: 'SEO Page Form' },
+    getBreadcrumbs: (route, t) => [
+      { url: '/', text: t('seo:home') },
+      { url: SEO_ROUTE_PATHS.PAGE_FORM, text: t('seo:SEOPageForm') },
     ],
   },
 };
@@ -37,9 +35,9 @@ export const SEO_SETTINGS_ROUTE: CustomRouteConfig = {
   component: SeoSettings,
   name: 'SEO Settings',
   meta: {
-    getBreadcrumbs: () => [
-      HOME_BREADCRUMB,
-      { url: SEO_ROUTE_PATHS.SETTINGS, text: 'SEO Settings' },
+    getBreadcrumbs: (route, t) => [
+      { url: '/', text: t('seo:home') },
+      { url: SEO_ROUTE_PATHS.SETTINGS, text: t('seo:SEOSettings') },
     ],
   },
 };

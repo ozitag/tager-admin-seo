@@ -1,6 +1,6 @@
 <template>
   <page
-    title="SEO Services"
+    :title="t('seo:SEOServices')"
     :is-content-loading="isContentLoading"
     :footer="{
       backHref: '/',
@@ -21,10 +21,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref, watch } from '@vue/composition-api';
+import {
+  defineComponent,
+  onMounted,
+  ref,
+  SetupContext,
+  watch,
+} from '@vue/composition-api';
 
 import { convertRequestErrorToMap, useResource } from '@tager/admin-services';
 import { DynamicField } from '@tager/admin-dynamic-field';
+import { useTranslation } from '@tager/admin-ui';
 
 import {
   getSeoSettingList,
@@ -41,7 +48,9 @@ import {
 export default defineComponent({
   name: 'SeoSettings',
   components: { DynamicField },
-  setup(props, context) {
+  setup(props, context: SetupContext) {
+    const { t } = useTranslation(context);
+
     const [fetchSettingList, { data: settingList, loading }] = useResource<
       Array<SettingItemType>
     >({
@@ -78,8 +87,8 @@ export default defineComponent({
 
           context.root.$toast({
             variant: 'success',
-            title: 'Success',
-            body: `SEO settings have been successfully updated`,
+            title: t('seo:success'),
+            body: t('seo:SEOSettingsNaveBeenSuccessfullyUpdated'),
           });
         })
         .catch((error) => {
@@ -87,8 +96,8 @@ export default defineComponent({
           errors.value = convertRequestErrorToMap(error);
           context.root.$toast({
             variant: 'danger',
-            title: 'Error',
-            body: `SEO settings update has been failed`,
+            title: t('seo:error'),
+            body: t('seo:SEOSettingsUpdateHasBeenFailed'),
           });
         })
         .finally(() => {
@@ -97,6 +106,7 @@ export default defineComponent({
     }
 
     return {
+      t,
       isContentLoading: loading,
       submitForm,
       isSubmitting,
