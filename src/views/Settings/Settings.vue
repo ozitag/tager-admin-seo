@@ -1,13 +1,5 @@
 <template>
-  <page
-    :title="t('seo:SEOServices')"
-    :is-content-loading="isContentLoading"
-    :footer="{
-      backHref: '/',
-      onSubmit: submitForm,
-      isSubmitting: isSubmitting,
-    }"
-  >
+  <page :title="$t('seo:SEOServices')" :is-content-loading="isContentLoading">
     <template v-slot:content>
       <form novalidate @submit.prevent="submitForm">
         <DynamicField
@@ -16,6 +8,14 @@
           :field="field"
         />
       </form>
+    </template>
+
+    <template v-slot:footer>
+      <form-footer
+        back-href="/"
+        :on-submit="submitForm"
+        :is-submitting="isSubmitting"
+      />
     </template>
   </page>
 </template>
@@ -31,7 +31,7 @@ import {
 
 import { convertRequestErrorToMap, useResource } from '@tager/admin-services';
 import { DynamicField } from '@tager/admin-dynamic-field';
-import { useTranslation } from '@tager/admin-ui';
+import { TagerFormSubmitEvent, useTranslation } from '@tager/admin-ui';
 
 import {
   getSeoSettingList,
@@ -43,7 +43,7 @@ import {
   convertSettingsToFormValues,
   convertSettingValuesToRequestPayload,
   SettingsFormValues,
-} from './SeoSettings.helpers';
+} from './Settings.helpers';
 
 export default defineComponent({
   name: 'SeoSettings',
@@ -57,7 +57,7 @@ export default defineComponent({
       fetchResource: getSeoSettingList,
       initialValue: [],
       context,
-      resourceName: 'Settings',
+      resourceName: 'SEO Settings',
     });
 
     onMounted(() => {
@@ -75,7 +75,7 @@ export default defineComponent({
 
     const errors = ref<Record<string, string>>({});
 
-    function submitForm() {
+    function submitForm(event: TagerFormSubmitEvent) {
       isSubmitting.value = true;
 
       const body = convertSettingValuesToRequestPayload(values.value);
@@ -83,12 +83,19 @@ export default defineComponent({
       updateSeoSettingList(body)
         .then(() => {
           errors.value = {};
-          context.root.$router.push('/');
+
+          if (event.type === 'save_exit') {
+            if (context.root.$previousRoute) {
+              context.root.$router.back();
+            } else {
+              context.root.$router.push('/');
+            }
+          }
 
           context.root.$toast({
             variant: 'success',
             title: t('seo:success'),
-            body: t('seo:SEOSettingsNaveBeenSuccessfullyUpdated'),
+            body: t('seo:SEOSettingsHaveBeenSuccessfullyUpdated'),
           });
         })
         .catch((error) => {
@@ -106,7 +113,6 @@ export default defineComponent({
     }
 
     return {
-      t,
       isContentLoading: loading,
       submitForm,
       isSubmitting,

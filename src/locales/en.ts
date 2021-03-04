@@ -1,26 +1,24 @@
 const EN = {
-  SEOPageSettings: 'SEO Page Settings',
-  seoPageList: 'Seo Page List',
-  SEOPageForm: 'SEO Page Form',
+  home: 'Home',
   settings: 'Settings',
-  backToSEOPageSettings: 'Back to SEO Page Settings',
-  title: 'Title',
-  description: 'Description',
-  openGraphTitle: 'Open Graph Title',
-  openGraphDescription: 'Open Graph Description',
-  openGraphImage: 'Open Graph Image',
-  edit: 'Edit',
-  alias: 'Alias',
-  name: 'Name',
-  actions: 'Actions',
   success: 'Success',
   SEOSettingsHaveBeenSuccessfullyUpdated:
     'SEO settings have been successfully updated',
   error: 'Error',
   SEOSettingsUpdateHasBeenFailed: 'SEO settings update has been failed',
-  home: 'Home',
   SEOSettings: 'SEO Settings',
   SEOServices: 'SEO Services',
+
+  templates: 'Templates',
+  SEOTemplates: 'SEO Templates',
+  pageTitle: 'Page title',
+  pageDescription: 'Page description',
+  openGraphImage: 'Open graph image',
+  copy: 'Copy',
+  copied: 'Copied',
+  SEOTemplatesHaveBeenSuccessfullyUpdated:
+    'SEO templates have been successfully updated',
+  SEOTemplatesUpdateHasBeenFailed: 'SEO templates update has been failed',
 };
 
 export default EN;

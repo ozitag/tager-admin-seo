@@ -9,11 +9,7 @@ import '@tager/admin-ui/dist/admin-ui.css';
 
 import config from './config/config.json';
 import App from './views/App.vue';
-import {
-  SEO_PAGE_FORM_ROUTE,
-  SEO_PAGE_LIST_ROUTE,
-  SEO_SETTINGS_ROUTE,
-} from './constants/routes';
+import { SEO_SETTINGS_ROUTE, SEO_TEMPLATES_ROUTE } from './constants/routes';
 import EN from './locales/en';
 import RU from './locales/ru';
 
@@ -21,7 +17,7 @@ configStore.setConfig(config);
 
 const router = createRouter(
   {
-    routes: [SEO_PAGE_LIST_ROUTE, SEO_PAGE_FORM_ROUTE, SEO_SETTINGS_ROUTE],
+    routes: [SEO_SETTINGS_ROUTE, SEO_TEMPLATES_ROUTE],
   },
   { useTitleSync: false }
 );
@@ -29,7 +25,7 @@ const router = createRouter(
 i18n.addTranslations('en', 'seo', EN);
 i18n.addTranslations('ru', 'seo', RU);
 
-i18n.init({ debug: false }).then(() => {
+i18n.init({ debug: false, lng: 'ru' }).then(() => {
   Vue.use(VueCompositionApi);
 
   const app = createApp({
