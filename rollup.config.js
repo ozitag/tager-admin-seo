@@ -24,6 +24,7 @@ export default {
     '@tager/admin-layout',
     '@tager/admin-dynamic-field',
     'path-to-regexp',
+    'lodash.kebabcase',
   ],
   plugins: [
     typescript(),

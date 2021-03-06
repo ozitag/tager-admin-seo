@@ -1,34 +1,9 @@
 import { CustomRouteConfig } from '@tager/admin-layout';
 
-import SeoPageList from '../views/SeoPageList.vue';
-import SeoPageForm from '../views/SeoPageForm.vue';
-import SeoSettings from '../views/SeoSettings';
+import SeoSettings from '../views/Settings';
+import SeoTemplates from '../views/Templates';
 
 import { SEO_ROUTE_PATHS } from './paths';
-
-export const SEO_PAGE_LIST_ROUTE: CustomRouteConfig = {
-  path: SEO_ROUTE_PATHS.PAGE_LIST,
-  component: SeoPageList,
-  name: 'SEO Page Settings',
-  meta: {
-    getBreadcrumbs: (route, t) => [
-      { url: '/', text: t('seo:home') },
-      { url: SEO_ROUTE_PATHS.PAGE_LIST, text: t('seo:SEOPageSettings') },
-    ],
-  },
-};
-
-export const SEO_PAGE_FORM_ROUTE: CustomRouteConfig = {
-  path: SEO_ROUTE_PATHS.PAGE_FORM,
-  component: SeoPageForm,
-  name: 'SEO Page Form',
-  meta: {
-    getBreadcrumbs: (route, t) => [
-      { url: '/', text: t('seo:home') },
-      { url: SEO_ROUTE_PATHS.PAGE_FORM, text: t('seo:SEOPageForm') },
-    ],
-  },
-};
 
 export const SEO_SETTINGS_ROUTE: CustomRouteConfig = {
   path: SEO_ROUTE_PATHS.SETTINGS,
@@ -38,6 +13,18 @@ export const SEO_SETTINGS_ROUTE: CustomRouteConfig = {
     getBreadcrumbs: (route, t) => [
       { url: '/', text: t('seo:home') },
       { url: SEO_ROUTE_PATHS.SETTINGS, text: t('seo:SEOSettings') },
+    ],
+  },
+};
+
+export const SEO_TEMPLATES_ROUTE: CustomRouteConfig = {
+  path: SEO_ROUTE_PATHS.TEMPLATES,
+  component: SeoTemplates,
+  name: 'SEO Templates',
+  meta: {
+    getBreadcrumbs: (route, t) => [
+      { url: '/', text: t('seo:home') },
+      { url: SEO_ROUTE_PATHS.TEMPLATES, text: t('seo:SEOTemplates') },
     ],
   },
 };

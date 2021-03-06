@@ -10,7 +10,7 @@ import { defineComponent, SetupContext } from '@vue/composition-api';
 import { MenuItemType } from '@tager/admin-layout';
 import { useTranslation } from '@tager/admin-ui';
 
-import { getSeoPageListUrl, getSeoSettingsUrl } from '../utils/paths';
+import { getSeoSettingsUrl, getSeoTemplatesUrl } from '../utils/paths';
 
 export default defineComponent({
   name: 'App',
@@ -19,14 +19,16 @@ export default defineComponent({
 
     const sidebarMenuList: Array<MenuItemType> = [
       {
-        id: 'seo',
-        text: t('seo:SEOPageSettings'),
-        url: getSeoPageListUrl(),
+        id: 'settings',
+        text: t('seo:settings'),
+        url: getSeoSettingsUrl(),
         icon: 'settings',
-        children: [
-          { url: getSeoPageListUrl(), text: t('seo:seoPageList') },
-          { url: getSeoSettingsUrl(), text: t('seo:settings') },
-        ],
+      },
+      {
+        id: 'templates',
+        text: t('seo:templates'),
+        url: getSeoTemplatesUrl(),
+        icon: 'settings',
       },
     ];
 
