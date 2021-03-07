@@ -1,4 +1,4 @@
-import { Nullable } from '@tager/admin-services';
+import { FileType, Nullable } from '@tager/admin-services';
 import {
   FieldConfigUnion,
   FieldShortType,
@@ -29,12 +29,22 @@ export interface TemplateType {
   value: {
     pageTitle: string;
     pageDescription: string;
-    openGraphImage: Nullable<SingleFileInputValueType>;
+    openGraphImage: Nullable<FileType>;
   };
 }
 
 export interface TemplatesFormValues {
-  templates: Array<TemplateType>;
+  templates: Array<{
+    template: string;
+    name: string;
+    hasOpenGraphImage: boolean;
+    variables: Array<VariableType>;
+    value: {
+      pageTitle: string;
+      pageDescription: string;
+      openGraphImage: Nullable<SingleFileInputValueType>;
+    };
+  }>;
 }
 
 export interface TemplateUpdate {

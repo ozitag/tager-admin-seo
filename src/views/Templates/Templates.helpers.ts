@@ -1,3 +1,5 @@
+import { createId } from '@tager/admin-services';
+
 import {
   TemplatesFormValues,
   TemplateType,
@@ -13,7 +15,12 @@ export function getTemplatesFormValues(
       value: {
         pageTitle: template.value.pageTitle ?? '',
         pageDescription: template.value.pageDescription ?? '',
-        openGraphImage: template.value.openGraphImage,
+        openGraphImage: template.value.openGraphImage
+          ? {
+              id: createId(),
+              file: template.value.openGraphImage,
+            }
+          : null,
       },
     })),
   };
