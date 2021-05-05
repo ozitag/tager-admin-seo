@@ -6,29 +6,24 @@
         :key="templateIndex"
       >
         <Collapse :label="template.name" :unique-key="template.template">
-          <form-field-recommended-length-input
-            v-model="template.value.pageTitle"
-            :label="$t('seo:pageTitle')"
-            :min="50"
-            :max="60"
-            :name="kebabcase(`pageTitle-${template.template}`)"
-          />
-
-          <form-field-recommended-length-input
-            v-model="template.value.pageDescription"
-            :label="$t('seo:pageDescription')"
-            :min="115"
-            :max="165"
-            type="textarea"
-            :name="kebabcase(`pageDescription-${template.template}`)"
-          />
-
-          <form-field-file-input
-            v-if="template.hasOpenGraphImage"
-            v-model="template.value.openGraphImage"
-            :label="$t('seo:openGraphImage')"
-            file-type="image"
-            :name="kebabcase(`openGraphImage-${template.template}`)"
+          <seo-field-group
+            :title="template.value.pageTitle"
+            :title-name="kebabcase(`pageTitle-${template.template}`)"
+            :description="template.value.pageDescription"
+            :description-name="
+              kebabcase(`pageDescription-${template.template}`)
+            "
+            :should-display-keywords="info.keywordsEnabled"
+            :keywords="template.value.keywords"
+            :keywords-name="kebabcase(`keywords-${template.template}`)"
+            :should-display-image="template.hasOpenGraphImage"
+            :image="template.value.openGraphImage"
+            :image-name="kebabcase(`openGraphImage-${template.template}`)"
+            :image-scenario="info.openGraphImageScenario"
+            @change:title="template.value.pageTitle = $event"
+            @change:description="template.value.pageDescription = $event"
+            @change:keywords="template.value.keywords = $event"
+            @change:image="template.value.openGraphImage = $event"
           />
 
           <div class="variables">
@@ -55,6 +50,7 @@
 
 <script lang="ts">
 import {
+  computed,
   defineComponent,
   onMounted,
   ref,
@@ -63,14 +59,23 @@ import {
 } from '@vue/composition-api';
 import kebabcase from 'lodash.kebabcase';
 
-import { convertRequestErrorToMap, useResource } from '@tager/admin-services';
+import {
+  convertRequestErrorToMap,
+  Nullable,
+  useResource,
+} from '@tager/admin-services';
 import { TagerFormSubmitEvent, useTranslation } from '@tager/admin-ui';
 
-import { getSeoTemplates, updateSeoTemplates } from '../../services/requests';
+import {
+  getSeoInfo,
+  getSeoTemplates,
+  updateSeoTemplates,
+} from '../../services/requests';
 import {
   TemplatesFormValues,
   TemplateType,
   TemplatesUpdatePayload,
+  InfoModel,
 } from '../../typings/model';
 
 import Collapse from './components/Collapse';
@@ -96,8 +101,18 @@ export default defineComponent({
       initialValue: [],
     });
 
+    const [fetchInfo, { data: info, loading: isInfoLoading }] = useResource<
+      Nullable<InfoModel>
+    >({
+      fetchResource: () => getSeoInfo(),
+      context,
+      resourceName: 'SEO Info',
+      initialValue: null,
+    });
+
     onMounted(() => {
       fetchTemplates();
+      fetchInfo();
     });
 
     const isSubmitting = ref<boolean>(false);
@@ -149,12 +164,17 @@ export default defineComponent({
         });
     }
 
+    const isContentLoading = computed<boolean>(
+      () => isTemplatesLoading.value || isInfoLoading.value
+    );
+
     return {
       submitForm,
       isSubmitting,
-      values,
-      isContentLoading: isTemplatesLoading,
+      isContentLoading,
       kebabcase,
+      info,
+      values,
     };
   },
 });
