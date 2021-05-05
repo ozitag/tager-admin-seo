@@ -29,7 +29,7 @@ export interface TemplateType {
   value: {
     pageTitle: string;
     pageDescription: string;
-    keywords: string;
+    pageKeywords: string;
     openGraphImage: Nullable<FileType>;
   };
 }
@@ -43,7 +43,7 @@ export interface TemplatesFormValues {
     value: {
       pageTitle: string;
       pageDescription: string;
-      keywords: string;
+      pageKeywords: string;
       openGraphImage: Nullable<SingleFileInputValueType>;
     };
   }>;
@@ -53,7 +53,7 @@ export interface TemplateUpdate {
   template: string;
   pageTitle: string;
   pageDescription: string;
-  keywords: string;
+  pageKeywords: string;
   openGraphImage: Nullable<string>;
 }
 

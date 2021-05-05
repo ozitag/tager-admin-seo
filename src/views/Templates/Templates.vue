@@ -14,7 +14,7 @@
               kebabcase(`pageDescription-${template.template}`)
             "
             :should-display-keywords="info.keywordsEnabled"
-            :keywords="template.value.keywords"
+            :keywords="template.value.pageKeywords"
             :keywords-name="kebabcase(`keywords-${template.template}`)"
             :should-display-image="template.hasOpenGraphImage"
             :image="template.value.openGraphImage"
@@ -22,7 +22,7 @@
             :image-scenario="info.openGraphImageScenario"
             @change:title="template.value.pageTitle = $event"
             @change:description="template.value.pageDescription = $event"
-            @change:keywords="template.value.keywords = $event"
+            @change:keywords="template.value.pageKeywords = $event"
             @change:image="template.value.openGraphImage = $event"
           />
 
