@@ -5,6 +5,7 @@ import {
   TemplateType,
   TemplatesUpdatePayload,
   SettingsUpdatePayload,
+  InfoModel,
 } from '../typings/model';
 
 export function getSeoSettingList(): Promise<
@@ -35,4 +36,8 @@ export function updateSeoTemplates(
     path: '/admin/seo/templates',
     body: payload,
   });
+}
+
+export function getSeoInfo(): Promise<ResponseBody<InfoModel>> {
+  return request.get({ path: '/admin/seo/info' });
 }

@@ -7,14 +7,14 @@ import {
 } from '@tager/admin-dynamic-field';
 import { SingleFileInputValueType } from '@tager/admin-ui';
 
-export type SettingItemType = {
+export interface SettingItemType {
   field: FieldConfigUnion;
   value: IncomingValueUnion;
-};
+}
 
-export type SettingsUpdatePayload = {
+export interface SettingsUpdatePayload {
   values: Array<FieldShortType<OutgoingValueUnion>>;
-};
+}
 
 export interface VariableType {
   name: string;
@@ -29,6 +29,7 @@ export interface TemplateType {
   value: {
     pageTitle: string;
     pageDescription: string;
+    keywords: string;
     openGraphImage: Nullable<FileType>;
   };
 }
@@ -42,6 +43,7 @@ export interface TemplatesFormValues {
     value: {
       pageTitle: string;
       pageDescription: string;
+      keywords: string;
       openGraphImage: Nullable<SingleFileInputValueType>;
     };
   }>;
@@ -51,9 +53,15 @@ export interface TemplateUpdate {
   template: string;
   pageTitle: string;
   pageDescription: string;
+  keywords: string;
   openGraphImage: Nullable<string>;
 }
 
 export interface TemplatesUpdatePayload {
   templates: Array<TemplateUpdate>;
+}
+
+export interface InfoModel {
+  keywordsEnabled: boolean;
+  openGraphImageScenario: string;
 }
