@@ -10,7 +10,7 @@
         role="img"
         :class="['icon-chevron-right', { 'icon-expand-more': isOpen }]"
       >
-        <svg-icon name="chevronRight" />
+        <ChevronRightIcon />
       </span>
 
       <span class="title">
@@ -25,23 +25,21 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from '@vue/composition-api';
+import { defineComponent, ref } from "vue";
 
-interface Props {
-  label: string;
-  uniqueKey: string;
-}
+import { ChevronRightIcon } from "@tager/admin-ui";
 
-export default defineComponent<Props>({
-  name: 'Collapse',
+export default defineComponent({
+  name: "Collapse",
+  components: { ChevronRightIcon },
   props: {
     label: {
       type: String,
-      default: '',
+      default: "",
     },
     uniqueKey: {
       type: String,
-      default: '',
+      default: "",
     },
   },
   setup() {

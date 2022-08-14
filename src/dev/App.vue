@@ -1,33 +1,34 @@
 <template>
-  <page-layout :sidebar-menu-list="sidebarMenuList">
+  <PageLayout :sidebar-menu-list="sidebarMenuList">
     <router-view />
-  </page-layout>
+  </PageLayout>
 </template>
 
 <script lang="ts">
-import { defineComponent, SetupContext } from "vue";
+import { defineComponent } from "vue";
 
-import { MenuItemType } from "@tager/admin-layout";
-import { SettingsIcon } from "@tager/admin-ui";
+import { type MenuItemType, PageLayout } from "@tager/admin-layout";
 import { useI18n } from "@tager/admin-services";
+import { SettingsIcon } from "@tager/admin-ui";
 
 import { getSeoSettingsUrl, getSeoTemplatesUrl } from "../utils/paths";
 
 export default defineComponent({
   name: "App",
+  components: { PageLayout },
   setup() {
-    const { t } = useI18n();
+    const i18n = useI18n();
 
     const sidebarMenuList: Array<MenuItemType> = [
       {
         id: "settings",
-        text: t("seo:settings"),
+        text: i18n.t("seo:settings"),
         url: getSeoSettingsUrl(),
         icon: SettingsIcon,
       },
       {
         id: "templates",
-        text: t("seo:templates"),
+        text: i18n.t("seo:templates"),
         url: getSeoTemplatesUrl(),
         icon: SettingsIcon,
       },

@@ -1,41 +1,37 @@
 <template>
   <div
-    :class="['variable', { 'is-copied': isCopied }]"
-    :title="t('seo:copy')"
-    @click="copyVarTemplate(getNameTemplate(name))"
+      :class="['variable', { 'is-copied': isCopied }]"
+      :title="t('seo:copy')"
+      @click="copyVarTemplate(getNameTemplate(name))"
   >
     <span class="label">
       <span>{{ label }}</span> -
       <span>{{ getNameTemplate(name) }}</span>
     </span>
-    <span class="copied">{{ t('seo:copied') }}!</span>
+    <span class="copied">{{ t("seo:copied") }}!</span>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, SetupContext } from '@vue/composition-api';
+import {defineComponent} from "vue";
 
-import { useCopyToClipboard, useTranslation } from '@tager/admin-ui';
+import {useCopyToClipboard} from "@tager/admin-ui";
+import {useI18n} from "@tager/admin-services";
 
-interface Props {
-  label: string;
-  name: string;
-}
-
-export default defineComponent<Props>({
-  name: 'Variable',
+export default defineComponent({
+  name: "Variable",
   props: {
     label: {
       type: String,
-      default: '',
+      default: "",
     },
     name: {
       type: String,
-      default: '',
+      default: "",
     },
   },
-  setup(props: Props, context: SetupContext) {
-    const { t } = useTranslation(context);
+  setup() {
+    const {t} = useI18n();
     const [isCopied, copyVarTemplate] = useCopyToClipboard(500);
 
     function getNameTemplate(name: string): string {

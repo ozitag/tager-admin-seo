@@ -1,6 +1,9 @@
 <template>
-  <page :title="$t('seo:SEOServices')" :is-content-loading="isContentLoading">
-    <template v-slot:content>
+  <Page
+    :title="$i18n.t('seo:SEOServices')"
+    :is-content-loading="isContentLoading"
+  >
+    <template #content>
       <form novalidate @submit.prevent="submitForm">
         <DynamicField
           v-for="field of values"
@@ -10,54 +13,60 @@
       </form>
     </template>
 
-    <template v-slot:footer>
-      <form-footer
+    <template #footer>
+      <FormFooter
         back-href="/"
-        :on-submit="submitForm"
         :is-submitting="isSubmitting"
+        @submit="submitForm"
       />
     </template>
-  </page>
+  </Page>
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  onMounted,
-  ref,
-  SetupContext,
-  watch,
-} from '@vue/composition-api';
+import { defineComponent, onMounted, ref, SetupContext, watch } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
-import { convertRequestErrorToMap, useResource } from '@tager/admin-services';
-import { DynamicField } from '@tager/admin-dynamic-field';
-import { TagerFormSubmitEvent, useTranslation } from '@tager/admin-ui';
+import {
+  convertRequestErrorToMap,
+  navigateBack,
+  useI18n,
+  useResource,
+  useToast,
+} from "@tager/admin-services";
+import { DynamicField } from "@tager/admin-dynamic-field";
+import { FormFooter, TagerFormSubmitEvent } from "@tager/admin-ui";
+import { Page } from "@tager/admin-layout";
 
 import {
   getSeoSettingList,
   updateSeoSettingList,
-} from '../../services/requests';
-import { SettingItemType } from '../../typings/model';
+} from "../../services/requests";
+import { SettingItemType } from "../../typings/model";
+import { getSeoTemplatesUrl } from "../../utils/paths";
 
 import {
   convertSettingsToFormValues,
   convertSettingValuesToRequestPayload,
   SettingsFormValues,
-} from './Settings.helpers';
+} from "./Settings.helpers";
 
 export default defineComponent({
-  name: 'SeoSettings',
-  components: { DynamicField },
-  setup(props, context: SetupContext) {
-    const { t } = useTranslation(context);
+  name: "SeoSettings",
+  components: { FormFooter, Page, DynamicField },
+  setup() {
+    const { t } = useI18n();
+
+    const route = useRoute();
+    const router = useRouter();
+    const toast = useToast();
 
     const [fetchSettingList, { data: settingList, loading }] = useResource<
       Array<SettingItemType>
     >({
       fetchResource: getSeoSettingList,
       initialValue: [],
-      context,
-      resourceName: 'SEO Settings',
+      resourceName: "SEO Settings",
     });
 
     onMounted(() => {
@@ -84,27 +93,23 @@ export default defineComponent({
         .then(() => {
           errors.value = {};
 
-          if (event.type === 'save_exit') {
-            if (context.root.$previousRoute) {
-              context.root.$router.back();
-            } else {
-              context.root.$router.push('/');
-            }
+          if (event.type === "save_exit") {
+            navigateBack(router, "/");
           }
 
-          context.root.$toast({
-            variant: 'success',
-            title: t('seo:success'),
-            body: t('seo:SEOSettingsHaveBeenSuccessfullyUpdated'),
+          toast.show({
+            variant: "success",
+            title: t("seo:success"),
+            body: t("seo:SEOSettingsHaveBeenSuccessfullyUpdated"),
           });
         })
         .catch((error) => {
           console.error(error);
           errors.value = convertRequestErrorToMap(error);
-          context.root.$toast({
-            variant: 'danger',
-            title: t('seo:error'),
-            body: t('seo:SEOSettingsUpdateHasBeenFailed'),
+          toast.show({
+            variant: "danger",
+            title: t("seo:error"),
+            body: t("seo:SEOSettingsUpdateHasBeenFailed"),
           });
         })
         .finally(() => {

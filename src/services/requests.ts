@@ -1,4 +1,4 @@
-import { request, ResponseBody } from '@tager/admin-services';
+import { request, ResponseBody } from "@tager/admin-services";
 
 import {
   SettingItemType,
@@ -6,7 +6,7 @@ import {
   TemplatesUpdatePayload,
   SettingsUpdatePayload,
   InfoModel,
-} from '../typings/model';
+} from "../typings/model";
 
 export function getSeoSettingList(): Promise<
   ResponseBody<Array<SettingItemType>>
@@ -26,18 +26,18 @@ export function updateSeoSettingList(
 }
 
 export function getSeoTemplates(): Promise<ResponseBody<Array<TemplateType>>> {
-  return request.get({ path: '/admin/seo/templates' });
+  return request.get({ path: "/admin/seo/templates" });
 }
 
 export function updateSeoTemplates(
   payload: TemplatesUpdatePayload
 ): Promise<ResponseBody<Array<TemplateType>>> {
   return request.post({
-    path: '/admin/seo/templates',
+    path: "/admin/seo/templates",
     body: payload,
   });
 }
 
 export function getSeoInfo(): Promise<ResponseBody<InfoModel>> {
-  return request.get({ path: '/admin/seo/info' });
+  return request.get({ path: "/admin/seo/info" });
 }

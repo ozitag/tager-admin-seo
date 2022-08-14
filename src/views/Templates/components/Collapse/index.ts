@@ -1,1 +1,1 @@
-export { default } from './Collapse.vue';
+export { default } from "./Collapse.vue";

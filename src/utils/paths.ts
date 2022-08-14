@@ -1,4 +1,4 @@
-import { SEO_ROUTE_PATHS } from '../constants/paths';
+import { SEO_ROUTE_PATHS } from "../constants/paths";
 
 export function getSeoSettingsUrl(): string {
   return SEO_ROUTE_PATHS.SETTINGS;

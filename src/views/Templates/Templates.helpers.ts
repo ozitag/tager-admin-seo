@@ -1,10 +1,10 @@
-import { createId } from '@tager/admin-services';
+import { createId } from "@tager/admin-services";
 
 import {
   TemplatesFormValues,
   TemplateType,
   TemplatesUpdatePayload,
-} from '../../typings/model';
+} from "../../typings/model";
 
 export function getTemplatesFormValues(
   templates: Array<TemplateType>
@@ -13,9 +13,9 @@ export function getTemplatesFormValues(
     templates: templates.map((template) => ({
       ...template,
       value: {
-        pageTitle: template.value.pageTitle ?? '',
-        pageDescription: template.value.pageDescription ?? '',
-        pageKeywords: template.value.pageKeywords ?? '',
+        pageTitle: template.value.pageTitle ?? "",
+        pageDescription: template.value.pageDescription ?? "",
+        pageKeywords: template.value.pageKeywords ?? "",
         openGraphImage: template.value.openGraphImage
           ? {
               id: createId(),

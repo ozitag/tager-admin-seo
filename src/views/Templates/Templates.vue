@@ -1,12 +1,15 @@
 <template>
-  <page :title="$t('seo:SEOTemplates')" :is-content-loading="isContentLoading">
+  <Page
+    :title="$i18n.t('seo:SEOTemplates')"
+    :is-content-loading="isContentLoading"
+  >
     <div class="templates">
       <div
         v-for="(template, templateIndex) of values.templates"
         :key="templateIndex"
       >
         <Collapse :label="template.name" :unique-key="template.template">
-          <seo-field-group
+          <SeoFieldGroup
             :title="template.value.pageTitle"
             :title-name="kebabcase(`pageTitle-${template.template}`)"
             :description="template.value.pageDescription"
@@ -38,75 +41,78 @@
       </div>
     </div>
 
-    <template v-slot:footer>
-      <form-footer
+    <template #footer>
+      <FormFooter
         back-href="/"
-        :on-submit="submitForm"
         :is-submitting="isSubmitting"
+        @submit="submitForm"
       />
     </template>
-  </page>
+  </Page>
 </template>
 
 <script lang="ts">
-import {
-  computed,
-  defineComponent,
-  onMounted,
-  ref,
-  SetupContext,
-  watch,
-} from '@vue/composition-api';
-import kebabcase from 'lodash.kebabcase';
+import { computed, defineComponent, onMounted, ref, watch } from "vue";
+import kebabcase from "lodash.kebabcase";
+import { useRoute, useRouter } from "vue-router";
 
 import {
   convertRequestErrorToMap,
+  navigateBack,
   Nullable,
+  useI18n,
   useResource,
-} from '@tager/admin-services';
-import { TagerFormSubmitEvent, useTranslation } from '@tager/admin-ui';
+  useToast,
+} from "@tager/admin-services";
+import {
+  FormFooter,
+  SeoFieldGroup,
+  TagerFormSubmitEvent,
+} from "@tager/admin-ui";
+import { Page } from "@tager/admin-layout";
 
 import {
   getSeoInfo,
   getSeoTemplates,
   updateSeoTemplates,
-} from '../../services/requests';
+} from "../../services/requests";
 import {
   TemplatesFormValues,
   TemplateType,
   TemplatesUpdatePayload,
   InfoModel,
-} from '../../typings/model';
+} from "../../typings/model";
+import { getSeoTemplatesUrl } from "../../utils/paths";
 
-import Collapse from './components/Collapse';
-import Variable from './components/Variable';
+import Collapse from "./components/Collapse";
+import Variable from "./components/Variable";
 import {
   convertTemplatesFormValuesToUpdatePayload,
   getTemplatesFormValues,
-} from './Templates.helpers';
+} from "./Templates.helpers";
 
 export default defineComponent({
-  name: 'SeoTemplates',
-  components: { Collapse, Variable },
-  setup(props, context: SetupContext) {
-    const { t } = useTranslation(context);
+  name: "SeoTemplates",
+  components: { FormFooter, SeoFieldGroup, Page, Collapse, Variable },
+  setup() {
+    const { t } = useI18n();
 
-    const [
-      fetchTemplates,
-      { data: templates, loading: isTemplatesLoading },
-    ] = useResource<Array<TemplateType>>({
-      fetchResource: () => getSeoTemplates(),
-      context,
-      resourceName: 'SEO Templates',
-      initialValue: [],
-    });
+    const toast = useToast();
+    const router = useRouter();
+    const route = useRoute();
+
+    const [fetchTemplates, { data: templates, loading: isTemplatesLoading }] =
+      useResource<Array<TemplateType>>({
+        fetchResource: () => getSeoTemplates(),
+        resourceName: "SEO Templates",
+        initialValue: [],
+      });
 
     const [fetchInfo, { data: info, loading: isInfoLoading }] = useResource<
       Nullable<InfoModel>
     >({
       fetchResource: () => getSeoInfo(),
-      context,
-      resourceName: 'SEO Info',
+      resourceName: "SEO Info",
       initialValue: null,
     });
 
@@ -128,35 +134,30 @@ export default defineComponent({
     function submitForm(event: TagerFormSubmitEvent) {
       isSubmitting.value = true;
 
-      const body: TemplatesUpdatePayload = convertTemplatesFormValuesToUpdatePayload(
-        values.value
-      );
+      const body: TemplatesUpdatePayload =
+        convertTemplatesFormValuesToUpdatePayload(values.value);
 
       updateSeoTemplates(body)
         .then(() => {
           errors.value = {};
 
-          if (event.type === 'save_exit') {
-            if (context.root.$previousRoute) {
-              context.root.$router.back();
-            } else {
-              context.root.$router.push('/');
-            }
+          if (event.type === "save_exit") {
+            navigateBack(router, "/");
           }
 
-          context.root.$toast({
-            variant: 'success',
-            title: t('seo:success'),
-            body: t('seo:SEOTemplatesHaveBeenSuccessfullyUpdated'),
+          toast.show({
+            variant: "success",
+            title: t("seo:success"),
+            body: t("seo:SEOTemplatesHaveBeenSuccessfullyUpdated"),
           });
         })
         .catch((error) => {
           console.error(error);
           errors.value = convertRequestErrorToMap(error);
-          context.root.$toast({
-            variant: 'danger',
-            title: t('seo:error'),
-            body: t('seo:SEOTemplatesUpdateHasBeenFailed'),
+          toast.show({
+            variant: "danger",
+            title: t("seo:error"),
+            body: t("seo:SEOTemplatesUpdateHasBeenFailed"),
           });
         })
         .finally(() => {
