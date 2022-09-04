@@ -25,11 +25,13 @@ export interface TemplateType {
   template: string;
   name: string;
   hasOpenGraphImage: boolean;
+  h1Enabled: boolean;
   variables: Array<VariableType>;
   value: {
     pageTitle: string;
     pageDescription: string;
     pageKeywords: string;
+    h1: string;
     openGraphImage: Nullable<FileType>;
   };
 }
@@ -39,11 +41,13 @@ export interface TemplatesFormValues {
     template: string;
     name: string;
     hasOpenGraphImage: boolean;
+    h1Enabled: boolean;
     variables: Array<VariableType>;
     value: {
       pageTitle: string;
       pageDescription: string;
       pageKeywords: string;
+      pageH1: string;
       openGraphImage: Nullable<SingleFileInputValueType>;
     };
   }>;
@@ -54,6 +58,7 @@ export interface TemplateUpdate {
   pageTitle: string;
   pageDescription: string;
   pageKeywords: string;
+  h1: string;
   openGraphImage: Nullable<string>;
 }
 

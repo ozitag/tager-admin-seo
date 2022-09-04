@@ -16,6 +16,7 @@ export function getTemplatesFormValues(
         pageTitle: template.value.pageTitle ?? "",
         pageDescription: template.value.pageDescription ?? "",
         pageKeywords: template.value.pageKeywords ?? "",
+        pageH1: template.value.h1 ?? "",
         openGraphImage: template.value.openGraphImage
           ? {
               id: createId(),
@@ -36,6 +37,7 @@ export function convertTemplatesFormValuesToUpdatePayload(
       pageTitle: template.value.pageTitle,
       pageDescription: template.value.pageDescription,
       pageKeywords: template.value.pageKeywords,
+      h1: template.value.pageH1,
       openGraphImage: template.value.openGraphImage?.file.id ?? null,
     })),
   };

@@ -1,4 +1,5 @@
 import { createApp } from "vue";
+import { createPinia } from "pinia";
 
 import { configStore, i18n, i18nPlugin } from "@tager/admin-services";
 import { createRouter } from "@tager/admin-layout";
@@ -25,8 +26,10 @@ const router = createRouter(
 );
 
 const app = createApp(App);
+const pinia = createPinia();
 
 app.use(router);
+app.use(pinia);
 app.use(i18nPlugin);
 
 applyTranslations();

@@ -4,7 +4,7 @@
     :is-content-loading="isContentLoading"
   >
     <template #content>
-      <form novalidate @submit.prevent="submitForm">
+      <form novalidate>
         <DynamicField
           v-for="field of values"
           :key="field.name"

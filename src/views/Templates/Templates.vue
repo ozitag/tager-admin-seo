@@ -16,6 +16,9 @@
             :description-name="
               kebabcase(`pageDescription-${template.template}`)
             "
+            :should-display-h1="template.h1Enabled"
+            :h1="template.value.pageH1"
+            :h1-name="kebabcase(`h1-${template.template}`)"
             :should-display-keywords="info.keywordsEnabled"
             :keywords="template.value.pageKeywords"
             :keywords-name="kebabcase(`keywords-${template.template}`)"
@@ -26,6 +29,7 @@
             @change:title="template.value.pageTitle = $event"
             @change:description="template.value.pageDescription = $event"
             @change:keywords="template.value.pageKeywords = $event"
+            @change:h1="template.value.pageH1 = $event"
             @change:image="template.value.openGraphImage = $event"
           />
 
@@ -82,7 +86,6 @@ import {
   TemplatesUpdatePayload,
   InfoModel,
 } from "../../typings/model";
-import { getSeoTemplatesUrl } from "../../utils/paths";
 
 import Collapse from "./components/Collapse";
 import Variable from "./components/Variable";
@@ -99,7 +102,6 @@ export default defineComponent({
 
     const toast = useToast();
     const router = useRouter();
-    const route = useRoute();
 
     const [fetchTemplates, { data: templates, loading: isTemplatesLoading }] =
       useResource<Array<TemplateType>>({
