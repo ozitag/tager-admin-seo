@@ -43,7 +43,6 @@ import {
   updateSeoSettingList,
 } from "../../services/requests";
 import { SettingItemType } from "../../typings/model";
-import { getSeoTemplatesUrl } from "../../utils/paths";
 
 import {
   convertSettingsToFormValues,
@@ -100,7 +99,7 @@ export default defineComponent({
           toast.show({
             variant: "success",
             title: t("seo:success"),
-            body: t("seo:SEOSettingsHaveBeenSuccessfullyUpdated"),
+            body: t("seo:SEOServicesHaveBeenSuccessfullyUpdated"),
           });
         })
         .catch((error) => {
@@ -109,7 +108,7 @@ export default defineComponent({
           toast.show({
             variant: "danger",
             title: t("seo:error"),
-            body: t("seo:SEOSettingsUpdateHasBeenFailed"),
+            body: t("seo:SEOServicesUpdateHasBeenFailed"),
           });
         })
         .finally(() => {

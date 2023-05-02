@@ -12,7 +12,7 @@ export const SEO_SETTINGS_ROUTE: RouteRecordRaw = {
   meta: {
     getBreadcrumbs: (route, { t }) => [
       { url: "/", text: t("seo:home") },
-      { url: SEO_ROUTE_PATHS.SETTINGS, text: t("seo:SEOSettings") },
+      { url: SEO_ROUTE_PATHS.SETTINGS, text: t("seo:SEOServices") },
     ],
   },
 };
