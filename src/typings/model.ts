@@ -1,11 +1,11 @@
-import { FileType, Nullable } from "@tager/admin-services";
+import { type FileType, type Nullable } from "@tager/admin-services";
 import {
-  FieldConfigUnion,
-  FieldShortType,
-  IncomingValueUnion,
-  OutgoingValueUnion,
+  type FieldConfigUnion,
+  type FieldShortType,
+  type IncomingValueUnion,
+  type OutgoingValueUnion,
 } from "@tager/admin-dynamic-field";
-import { SingleFileInputValueType } from "@tager/admin-ui";
+import { type SingleFileInputValueType } from "@tager/admin-ui";
 
 export interface SettingItemType {
   field: FieldConfigUnion;

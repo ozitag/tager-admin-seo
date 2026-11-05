@@ -1,9 +1,9 @@
 import { createId } from "@tager/admin-services";
 
 import {
-  TemplatesFormValues,
-  TemplateType,
-  TemplatesUpdatePayload,
+  type TemplatesFormValues,
+  type TemplateType,
+  type TemplatesUpdatePayload,
 } from "../../typings/model";
 
 export function getTemplatesFormValues(

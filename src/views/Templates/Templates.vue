@@ -19,13 +19,13 @@
             :should-display-h1="template.h1Enabled"
             :h1="template.value.pageH1"
             :h1-name="kebabcase(`h1-${template.template}`)"
-            :should-display-keywords="info.keywordsEnabled"
+            :should-display-keywords="info?.keywordsEnabled"
             :keywords="template.value.pageKeywords"
             :keywords-name="kebabcase(`keywords-${template.template}`)"
             :should-display-image="template.hasOpenGraphImage"
             :image="template.value.openGraphImage"
             :image-name="kebabcase(`openGraphImage-${template.template}`)"
-            :image-scenario="info.openGraphImageScenario"
+            :image-scenario="info?.openGraphImageScenario"
             @change:title="template.value.pageTitle = $event"
             @change:description="template.value.pageDescription = $event"
             @change:keywords="template.value.pageKeywords = $event"
@@ -63,7 +63,7 @@ import { useRoute, useRouter } from "vue-router";
 import {
   convertRequestErrorToMap,
   navigateBack,
-  Nullable,
+  type Nullable,
   useI18n,
   useResource,
   useToast,
@@ -71,7 +71,7 @@ import {
 import {
   FormFooter,
   SeoFieldGroup,
-  TagerFormSubmitEvent,
+  type TagerFormSubmitEvent,
 } from "@tager/admin-ui";
 import { Page } from "@tager/admin-layout";
 
@@ -81,10 +81,10 @@ import {
   updateSeoTemplates,
 } from "../../services/requests";
 import {
-  TemplatesFormValues,
-  TemplateType,
-  TemplatesUpdatePayload,
-  InfoModel,
+  type TemplatesFormValues,
+  type TemplateType,
+  type TemplatesUpdatePayload,
+  type InfoModel,
 } from "../../typings/model";
 
 import Collapse from "./components/Collapse";

@@ -5,9 +5,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, SetupContext } from "vue";
+import { defineComponent, type SetupContext } from "vue";
 
-import { MenuItemType } from "@tager/admin-layout";
+import { type MenuItemType } from "@tager/admin-layout";
 import { SettingsIcon } from "@tager/admin-ui";
 import { useI18n } from "@tager/admin-services";
 

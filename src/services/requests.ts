@@ -1,11 +1,11 @@
-import { request, ResponseBody } from "@tager/admin-services";
+import { request, type ResponseBody } from "@tager/admin-services";
 
 import {
-  SettingItemType,
-  TemplateType,
-  TemplatesUpdatePayload,
-  SettingsUpdatePayload,
-  InfoModel,
+  type SettingItemType,
+  type TemplateType,
+  type TemplatesUpdatePayload,
+  type SettingsUpdatePayload,
+  type InfoModel,
 } from "../typings/model";
 
 export function getSeoSettingList(): Promise<

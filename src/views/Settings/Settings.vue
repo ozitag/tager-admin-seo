@@ -7,7 +7,7 @@
       <form novalidate>
         <DynamicField
           v-for="field of values"
-          :key="field.name"
+          :key="field.id"
           :field="field"
         />
       </form>
@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref, SetupContext, watch } from "vue";
+import { defineComponent, onMounted, ref, type SetupContext, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 import {
@@ -35,19 +35,19 @@ import {
   useToast,
 } from "@tager/admin-services";
 import { DynamicField } from "@tager/admin-dynamic-field";
-import { FormFooter, TagerFormSubmitEvent } from "@tager/admin-ui";
+import { FormFooter, type TagerFormSubmitEvent } from "@tager/admin-ui";
 import { Page } from "@tager/admin-layout";
 
 import {
   getSeoSettingList,
   updateSeoSettingList,
 } from "../../services/requests";
-import { SettingItemType } from "../../typings/model";
+import { type SettingItemType } from "../../typings/model";
 
 import {
   convertSettingsToFormValues,
   convertSettingValuesToRequestPayload,
-  SettingsFormValues,
+  type SettingsFormValues,
 } from "./Settings.helpers";
 
 export default defineComponent({
